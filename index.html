@@ -5,50 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>김병하 홈페이지</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #ffffff;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #333333;
-        }
-        form {
-            margin-top: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        input[type="submit"]:hover {
-            background-color: #0056b3;
-        }
+        /* CSS 스타일은 생략 */
     </style>
 </head>
 <body>
@@ -56,7 +13,7 @@
         <h1>김병하 홈페이지</h1>
         <p>안녕하세요! 김병하의 홈페이지에 오신 것을 환영합니다.</p>
         
-        <form action="#" method="post">
+        <form id="myForm" action="#" method="post">
             <label for="name">이름:</label>
             <input type="text" id="name" name="name" required>
 
@@ -68,7 +25,30 @@
 
             <input type="submit" value="전송">
         </form>
-        <h2>추가할 내용을 확인 합니다.</h2>
     </div>
+
+    <script>
+        document.getElementById("myForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // 기본 제출 동작 방지
+
+            // 입력된 값 가져오기
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var message = document.getElementById("message").value;
+
+            // CSV 포맷으로 변환
+            var csvContent = "data:text/csv;charset=utf-8,"
+                            + "Name,Email,Message\n"
+                            + name + "," + email + "," + message;
+
+            // CSV 파일 다운로드
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "submission.csv");
+            document.body.appendChild(link); // 다운로드 링크 추가
+            link.click(); // 자동으로 다운로드 실행
+        });
+    </script>
 </body>
 </html>
