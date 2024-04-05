@@ -6,11 +6,25 @@
     <title>김병하 홈페이지</title>
     <style>
         /* CSS 스타일은 생략 */
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
         .container {
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            text-align: center;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #333;
+        }
+        p {
+            color: #666;
         }
         form {
             margin-top: 20px;
@@ -19,11 +33,12 @@
         label {
             display: block;
             margin-bottom: 5px;
+            color: #333;
         }
         input[type="text"],
         input[type="email"],
         textarea {
-            width: 100%;
+            width: calc(100% - 16px);
             padding: 8px;
             margin-bottom: 10px;
             border: 1px solid #ccc;
@@ -81,18 +96,6 @@
                 document.getElementById("error-msg").innerText = "모든 필드를 입력해주세요.";
                 return;
             }
-
-            // CSV 포맷으로 변환
-            var csvContent = "Name,Email,Message\n"
-                            + name + "," + email + "," + message;
-
-            // CSV 파일 다운로드
-            var encodedUri = encodeURI(csvContent);
-            var link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "submission.csv");
-            document.body.appendChild(link); // 다운로드 링크 추가
-            link.click(); // 자동으로 다운로드 실행
 
             // 폼 제출
             this.submit();
